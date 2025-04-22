@@ -112,4 +112,5 @@ type ProcessEnvironment interface {
 
 	// SetLogCallback sets the callback that the container's log output will be passed to.
 	SetLogCallback(func([]byte))
+	GetLocalIP(ctx context.Context) (string, error)
 }

@@ -20,7 +20,15 @@ import (
 	"github.com/pterodactyl/wings/system"
 )
 
+type Rule struct {
+	Ip       string `json:"ip"`
+	Port     int    `json:"port"`
+	Priority int    `json:"priority"`
+	Type     string `json:"type"`
+}
+
 type Client interface {
+	
 	GetBackupRemoteUploadURLs(ctx context.Context, backup string, size int64) (BackupRemoteUploadResponse, error)
 	GetInstallationScript(ctx context.Context, uuid string) (InstallationScript, error)
 	GetServerConfiguration(ctx context.Context, uuid string) (ServerConfigurationResponse, error)
@@ -32,6 +40,7 @@ type Client interface {
 	SetInstallationStatus(ctx context.Context, uuid string, data InstallStatusRequest) error
 	SetTransferStatus(ctx context.Context, uuid string, successful bool) error
 	ValidateSftpCredentials(ctx context.Context, request SftpAuthRequest) (SftpAuthResponse, error)
+	GetFirewallRules(ctx context.Context, uuid string) ([]Rule, error)
 	SendActivityLogs(ctx context.Context, activity []models.Activity) error
 }
 
